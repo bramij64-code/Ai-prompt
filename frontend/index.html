@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Architect Pro | AI Prompt Engineering Studio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), #7c3aed);
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Shimmer Effect */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(99, 102, 241, 0.1) 0%, 
+                rgba(99, 102, 241, 0.3) 50%, 
+                rgba(99, 102, 241, 0.1) 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+
+        /* Typewriter Effect */
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typewriter 2s steps(40) 1s 1 normal both;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Button Hover Effects */
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-gradient:active {
+            transform: translateY(0);
+        }
+
+        .btn-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-gradient:hover::after {
+            left: 100%;
+        }
+
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Code Block Styling */
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'PROMPT';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            border-radius: 0 0 0 4px;
+        }
+
+        /* Tab Styling */
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex">
+
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="md:hidden fixed top-4 left-4 z-50 p-3 bg-indigo-600 rounded-xl shadow-lg">
+        <i class="fas fa-bars text-white"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 md:w-80 glass-dark flex flex-col h-screen border-r border-indigo-900/30 fixed md:relative z-40 transition-transform duration-300">
+        <!-- Logo & Brand -->
+        <div class="p-6 border-b border-indigo-900/30">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold gradient-text">PromptArchitect</h1>
+                    <p class="text-xs text-gray-400">AI Engineering Studio</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Profile -->
+        <div id="userProfile" class="p-4 border-b border-indigo-900/30 hidden">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <i class="fas fa-user text-white"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 id="userName" class="font-semibold truncate">User Name</h3>
+                    <p id="userEmail" class="text-xs text-gray-400 truncate">user@example.com</p>
+                    <div class="flex items-center space-x-2 mt-1">
+                        <span class="px-2 py-0.5 text-xs bg-indigo-500/20 text-indigo-300 rounded-full">Free Plan</span>
+                        <span id="promptCount" class="text-xs text-gray-500">0 prompts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Section -->
+        <div id="authSection" class="p-4 border-b border-indigo-900/30">
+            <div id="authStatus" class="text-center">
+                <p class="text-gray-400 mb-3">Sign in to save your work</p>
+                <button onclick="toggleAuthModal()" class="w-full btn-gradient py-3 rounded-xl font-semibold transition-all">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Sign In / Register
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 overflow-y-auto p-4">
+            <div class="space-y-1">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 mb-3">Quick Actions</p>
+                <button onclick="scrollToSection('inputSection')" class="w-full text-left p-3 rounded-xl hover:bg-indigo-500/10 transition-colors flex items-center">
+                    <i class="fas fa-plus-circle mr-3 text-indigo-400"></i>
+                    <span>New Prompt</span>
+                </button>
+                <button onclick="scrollToSection('historySection')" class="w-full text-left p-3 rounded-xl hover:bg-indigo-500/10 transition-colors flex items-center">
+                    <i class="fas fa-history mr-3 text-purple-400"></i>
+                    <span>History</span>
+                    <span id="historyCount" class="ml-auto text-xs bg-indigo-500/20 px-2 py-1 rounded-full">0</span>
+                </button>
+                <button onclick="scrollToSection('templatesSection')" class="w-full text-left p-3 rounded-xl hover:bg-indigo-500/10 transition-colors flex items-center">
+                    <i class="fas fa-layer-group mr-3 text-green-400"></i>
+                    <span>Templates</span>
+                </button>
+            </div>
+
+            <div class="mt-8">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 mb-3">Recent Prompts</p>
+                <div id="historyList" class="space-y-2">
+                    <!-- History items will be loaded here -->
+                    <div class="text-center py-8">
+                        <i class="fas fa-history text-gray-600 text-3xl mb-3"></i>
+                        <p class="text-gray-500 text-sm">No history yet</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Bottom Section -->
+        <div class="p-4 border-t border-indigo-900/30">
+            <div class="space-y-2">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-400">Daily Usage</span>
+                    <span id="dailyUsage" class="font-semibold">0/100</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="usageBar" class="progress-fill w-0"></div>
+                </div>
+            </div>
+            <button onclick="toggleTheme()" class="w-full text-left p-3 rounded-xl hover:bg-indigo-500/10 transition-colors mt-4 flex items-center">
+                <i class="fas fa-moon mr-3 text-yellow-400"></i>
+                <span>Dark Theme</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto">
+        <!-- Header -->
+        <header class="sticky top-0 glass z-30 border-b border-indigo-900/30">
+            <div class="flex items-center justify-between p-4">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-400">Engineer</span>
+                        <div class="relative">
+                            <select id="promptType" class="appearance-none bg-indigo-900/30 border border-indigo-700/50 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent cursor-pointer">
+                                <option value="text">📝 Text Prompt</option>
+                                <option value="image">🎨 Image Prompt</option>
+                                <option value="video">🎬 Video Prompt</option>
+                                <option value="code">💻 Code Prompt</option>
+                                <option value="audio">🎵 Audio Prompt</option>
+                                <option value="data">📊 Data Analysis</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-400">Complexity</span>
+                        <div class="flex space-x-1 bg-indigo-900/30 rounded-xl p-1">
+                            <button data-complexity="simple" class="complexity-btn px-4 py-2 rounded-lg text-sm transition-all">Simple</button>
+                            <button data-complexity="detailed" class="complexity-btn px-4 py-2 rounded-lg text-sm transition-all bg-indigo-600">Detailed</button>
+                            <button data-complexity="comprehensive" class="complexity-btn px-4 py-2 rounded-lg text-sm transition-all">Comprehensive</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button onclick="openSettings()" class="p-2.5 hover:bg-indigo-500/10 rounded-xl transition-colors">
+                        <i class="fas fa-cog text-gray-400 hover:text-indigo-400"></i>
+                    </button>
+                    <button id="userMenuBtn" class="hidden items-center space-x-2 p-2 hover:bg-indigo-500/10 rounded-xl transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <span id="userDisplay" class="text-sm font-medium">Guest</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="p-4 md:p-6 space-y-8">
+            <!-- Hero Section -->
+            <section class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-3 gradient-text">Craft Perfect AI Prompts</h1>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Transform basic ideas into professional-grade prompts for GPT, DALL-E, Midjourney, and other AI models.</p>
+                </div>
+
+                <!-- Input Section -->
+                <div id="inputSection" class="glass rounded-2xl p-6 shadow-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">What would you like to create?</h2>
+                        <button onclick="showExamples()" class="text-sm text-indigo-400 hover:text-indigo-300">
+                            <i class="fas fa-lightbulb mr-1"></i> Need inspiration?
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <textarea 
+                            id="userInput" 
+                            class="w-full h-40 bg-transparent text-lg outline-none resize-none placeholder-gray-500"
+                            placeholder="Describe your idea here... Example: 'A cyberpunk detective story set in 2099 Tokyo' or 'A React component for a dashboard with dark mode'"
+                            oninput="updateCharCount()"
+                        ></textarea>
+                        <div class="flex justify-between items-center pt-4 border-t border-gray-800">
+                            <span id="charCount" class="text-sm text-gray-500">0 characters</span>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="clearInput()" class="px-4 py-2 text-sm hover:bg-gray-800 rounded-lg transition-colors">
+                                    Clear
+                                </button>
+                                <button id="generateBtn" onclick="generatePrompt()" class="btn-gradient px-8 py-3 rounded-xl font-bold flex items-center">
+                                    <i class="fas fa-magic mr-2"></i> Engineer Prompt
+                                    <span id="loader" class="hidden ml-2">
+                                        <div class="spinner-small w-4 h-4 border-2"></div>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div id="quickExamples" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <button onclick="useExample('text')" class="text-left p-4 rounded-xl bg-indigo-500/5 hover:bg-indigo-500/10 border border-indigo-500/20 transition-all card-hover">
+                            <i class="fas fa-file-alt text-indigo-400 mb-2"></i>
+                            <h4 class="font-medium mb-1">Business Proposal</h4>
+                            <p class="text-sm text-gray-400">Write a professional business proposal</p>
+                        </button>
+                        <button onclick="useExample('image')" class="text-left p-4 rounded-xl bg-purple-500/5 hover:bg-purple-500/10 border border-purple-500/20 transition-all card-hover">
+                            <i class="fas fa-palette text-purple-400 mb-2"></i>
+                            <h4 class="font-medium mb-1">Fantasy Landscape</h4>
+                            <p class="text-sm text-gray-400">Create a magical fantasy world scene</p>
+                        </button>
+                        <button onclick="useExample('code')" class="text-left p-4 rounded-xl bg-green-500/5 hover:bg-green-500/10 border border-green-500/20 transition-all card-hover">
+                            <i class="fas fa-code text-green-400 mb-2"></i>
+                            <h4 class="font-medium mb-1">API Function</h4>
+                            <p class="text-sm text-gray-400">Generate a REST API endpoint</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section id="outputSection" class="max-w-4xl mx-auto hidden space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Optimized Prompt</h2>
+                    <div class="flex items-center space-x-3">
+                        <div id="qualityBadge" class="px-4 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30">
+                            <i class="fas fa-star mr-1"></i> Quality: <span id="qualityScore">0</span>%
+                        </div>
+                        <button onclick="analyzePrompt()" class="px-4 py-1.5 text-sm bg-blue-500/10 text-blue-400 rounded-lg hover:bg-blue-500/20">
+                            <i class="fas fa-chart-bar mr-1"></i> Analyze
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Card -->
+                <div class="glass rounded-2xl overflow-hidden">
+                    <div class="p-6 border-b border-gray-800">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-sm text-gray-400">Type: </span>
+                                <span id="resultType" class="font-medium text-indigo-400">Text</span>
+                                <span class="mx-2 text-gray-600">•</span>
+                                <span class="text-sm text-gray-400">Words: </span>
+                                <span id="wordCount" class="font-medium">0</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="copyResult()" class="p-2.5 hover:bg-gray-800 rounded-lg transition-colors group">
+                                    <i class="far fa-copy text-gray-400 group-hover:text-white"></i>
+                                </button>
+                                <button onclick="savePrompt()" class="p-2.5 hover:bg-gray-800 rounded-lg transition-colors group">
+                                    <i class="far fa-save text-gray-400 group-hover:text-white"></i>
+                                </button>
+                                <button onclick="exportPrompt()" class="p-2.5 hover:bg-gray-800 rounded-lg transition-colors group">
+                                    <i class="fas fa-download text-gray-400 group-hover:text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div id="resultText" class="code-block text-gray-300 leading-relaxed whitespace-pre-wrap font-mono text-sm">
+                            <!-- Prompt will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations & Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass rounded-2xl p-6">
+                        <h3 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-lightbulb text-yellow-400 mr-2"></i>
+                            Improvement Suggestions
+                        </h3>
+                        <div id="recommendations" class="space-y-3">
+                            <!-- Recommendations will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-6">
+                        <h3 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-chart-line text-green-400 mr-2"></i>
+                            Prompt Metrics
+                        </h3>
+                        <div id="metrics" class="space-y-4">
+                            <!-- Metrics will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Templates Section -->
+            <section id="templatesSection" class="max-w-6xl mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Prompt Templates</h2>
+                    <div class="flex space-x-2">
+                        <button onclick="filterTemplates('all')" class="px-4 py-2 text-sm rounded-lg bg-indigo-600">All</button>
+                        <button onclick="filterTemplates('text')" class="px-4 py-2 text-sm rounded-lg hover:bg-gray-800">Text</button>
+                        <button onclick="filterTemplates('image')" class="px-4 py-2 text-sm rounded-lg hover:bg-gray-800">Image</button>
+                        <button onclick="filterTemplates('code')" class="px-4 py-2 text-sm rounded-lg hover:bg-gray-800">Code</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Template cards will be loaded here -->
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="historySection" class="max-w-6xl mx-auto hidden">
+                <h2 class="text-2xl font-bold mb-6">Prompt History</h2>
+                <div id="historyContent" class="space-y-4">
+                    <!-- History items will be loaded here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-check-circle text-green-400"></i>
+                <span id="toastMessage">Copied to clipboard!</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-dark w-full max-w-md p-8 rounded-2xl space-y-6">
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-robot text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold">Welcome to PromptArchitect</h2>
+                <p class="text-gray-400 mt-2">Sign in to save your prompts and access advanced features</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                    <input type="email" id="authEmail" placeholder="you@example.com" class="w-full bg-gray-900 border border-gray-700 p-3 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="authPassword" placeholder="••••••••" class="w-full bg-gray-900 border border-gray-700 p-3 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                </div>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="handleAuth('signup')" class="flex-1 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg font-semibold transition-colors">
+                    Sign Up
+                </button>
+                <button onclick="handleAuth('login')" class="flex-1 py-3 btn-gradient rounded-lg font-semibold">
+                    Login
+                </button>
+            </div>
+            
+            <div class="text-center pt-4 border-t border-gray-800">
+                <button onclick="toggleAuthModal()" class="text-gray-500 hover:text-gray-400 text-sm">
+                    Continue as Guest
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-dark w-full max-w-2xl p-8 rounded-2xl space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold">Settings</h2>
+                <button onclick="closeSettings()" class="p-2 hover:bg-gray-800 rounded-lg">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold mb-4">API Configuration</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Gemini API Key</label>
+                                <input type="password" placeholder="Enter your API key" class="w-full bg-gray-900 border border-gray-700 p-3 rounded-lg">
+                            </div>
+                            <button class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 rounded-lg font-semibold">
+                                Save Configuration
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold mb-4">Display Settings</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span>Dark Mode</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Animations</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase and App Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            onAuthStateChanged, 
+            signOut,
+            sendPasswordResetEmail 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let idToken = null;
+        let currentUser = null;
+
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const authModal = document.getElementById('authModal');
+        const settingsModal = document.getElementById('settingsModal');
+        const userProfile = document.getElementById('userProfile');
+        const authSection = document.getElementById('authSection');
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const loader = document.getElementById('loader');
+        const toast = document.getElementById('toast');
+        const complexityButtons = document.querySelectorAll('.complexity-btn');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initEventListeners();
+            loadTemplates();
+            updateComplexity('detailed'); // Default complexity
+        });
+
+        // Event Listeners
+        function initEventListeners() {
+            // Mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                sidebar.classList.toggle('open');
+            });
+
+            // Complexity buttons
+            complexityButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    updateComplexity(btn.dataset.complexity);
+                });
+            });
+
+            // Close modals on outside click
+            [authModal, settingsModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Enter key to generate
+            document.getElementById('userInput').addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    generatePrompt();
+                }
+            });
+        }
+
+        // Authentication Functions
+        window.handleAuth = async (mode) => {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+
+            if (!email || !password) {
+                showToast('Please enter email and password', 'error');
+                return;
+            }
+
+            try {
+                if (mode === 'signup') {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    showToast('Account created successfully!', 'success');
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast('Logged in successfully!', 'success');
+                }
+                toggleAuthModal();
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        };
+
+        window.logout = async () => {
+            try {
+                await signOut(auth);
+                showToast('Logged out successfully', 'success');
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
+        };
+
+        window.toggleAuthModal = () => {
+            authModal.classList.toggle('hidden');
+        };
+
+        // Auth State Observer
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            
+            if (user) {
+                idToken = await user.getIdToken();
+                
+                // Update UI for logged-in user
+                userProfile.classList.remove('hidden');
+                authSection.classList.add('hidden');
+                userMenuBtn.classList.remove('hidden');
+                
+                document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('userDisplay').textContent = user.email.split('@')[0];
+                
+                // Load user data
+                loadUserStats();
+                loadHistory();
+            } else {
+                // Update UI for guest
+                userProfile.classList.add('hidden');
+                authSection.classList.remove('hidden');
+                userMenuBtn.classList.add('hidden');
+                idToken = null;
+            }
+        });
+
+        // Prompt Generation
+        window.generatePrompt = async () => {
+            const prompt = document.getElementById('userInput').value.trim();
+            if (!prompt) {
+                showToast('Please enter a prompt first', 'warning');
+                return;
+            }
+
+            // Update UI
+            generateBtn.disabled = true;
+            loader.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': idToken ? `Bearer ${idToken}` : ''
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        type: document.getElementById('promptType').value,
+                        complexity: getSelectedComplexity()
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayResult(data);
+                    showToast('Prompt generated successfully!', 'success');
+                    
+                    // Update history if logged in
+                    if (idToken) {
+                        loadHistory();
+                        loadUserStats();
+                    }
+                } else {
+                    throw new Error(data.error || 'Generation failed');
+                }
+            } catch (error) {
+                console.error('Generation error:', error);
+                showToast(error.message, 'error');
+            } finally {
+                generateBtn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        };
+
+        // Display Results
+        function displayResult(data) {
+            const section = document.getElementById('outputSection');
+            const text = document.getElementById('resultText');
+            const qualityScore = document.getElementById('qualityScore');
+            const resultType = document.getElementById('resultType');
+            const wordCount = document.getElementById('wordCount');
+            const recommendations = document.getElementById('recommendations');
+            const metrics = document.getElementById('metrics');
+
+            // Update main result
+            section.classList.remove('hidden');
+            text.textContent = data.professional_prompt;
+            qualityScore.textContent = data.quality_metrics?.quality_score || 'N/A';
+            resultType.textContent = data.type.charAt(0).toUpperCase() + data.type.slice(1);
+            wordCount.textContent = data.word_count || data.professional_prompt.split(' ').length;
+
+            // Update recommendations
+            if (data.quality_metrics?.recommendations) {
+                recommendations.innerHTML = data.quality_metrics.recommendations
+                    .map(rec => `<div class="flex items-start space-x-2">
+                        <i class="fas fa-check text-green-400 mt-1"></i>
+                        <span class="text-sm">${rec}</span>
+                    </div>`).join('');
+            }
+
+            // Update metrics
+            if (data.quality_metrics?.indicators) {
+                const indicators = data.quality_metrics.indicators;
+                metrics.innerHTML = `
+                    <div class="space-y-3">
+                        ${Object.entries(indicators).map(([key, value]) => `
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-400">${formatKey(key)}</span>
+                                <span class="px-2 py-1 text-xs rounded-full ${value ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}">
+                                    ${value ? '✓' : '✗'}
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // Scroll to results
+            scrollToSection('outputSection');
+        }
+
+        // Utility Functions
+        function updateComplexity(complexity) {
+            complexityButtons.forEach(btn => {
+                if (btn.dataset.complexity === complexity) {
+                    btn.classList.add('bg-indigo-600');
+                } else {
+                    btn.classList.remove('bg-indigo-600');
+                }
+            });
+        }
+
+        function getSelectedComplexity() {
+            return Array.from(complexityButtons).find(btn => 
+                btn.classList.contains('bg-indigo-600')
+            )?.dataset.complexity || 'detailed';
+        }
+
+        function updateCharCount() {
+            const textarea = document.getElementById('userInput');
+            const charCount = document.getElementById('charCount');
+            charCount.textContent = `${textarea.value.length} characters`;
+        }
+
+        window.clearInput = () => {
+            document.getElementById('userInput').value = '';
+            updateCharCount();
+        };
+
+        window.useExample = (type) => {
+            const examples = {
+                text: 'Write a comprehensive business proposal for a sustainable energy startup seeking Series A funding.',
+                image: 'A majestic dragon perched on a floating crystal island overlooking a neon-lit cyberpunk city at dusk.',
+                code: 'Create a React hook for real-time form validation with TypeScript support and error handling.',
+                video: 'A cinematic drone shot flying through an abandoned overgrown city at golden hour.'
+            };
+            
+            document.getElementById('userInput').value = examples[type] || examples.text;
+            updateCharCount();
+            document.getElementById('promptType').value = type;
+        };
+
+        window.copyResult = () => {
+            const text = document.getElementById('resultText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Prompt copied to clipboard!', 'success');
+            });
+        };
+
+        window.savePrompt = () => {
+            if (!idToken) {
+                showToast('Please sign in to save prompts', 'warning');
+                toggleAuthModal();
+                return;
+            }
+            showToast('Prompt saved to your history', 'success');
+        };
+
+        window.exportPrompt = () => {
+            const text = document.getElementById('resultText').textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `prompt-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Prompt exported successfully', 'success');
+        };
+
+        window.scrollToSection = (sectionId) => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toastMessage');
+            
+            // Update message and color
+            messageEl.textContent = message;
+            toast.className = 'toast show';
+            
+            // Set icon based on type
+            const icon = toast.querySelector('i');
+            switch(type) {
+                case 'success':
+                    icon.className = 'fas fa-check-circle text-green-400';
+                    break;
+                case 'error':
+                    icon.className = 'fas fa-exclamation-circle text-red-400';
+                    break;
+                case 'warning':
+                    icon.className = 'fas fa-exclamation-triangle text-yellow-400';
+                    break;
+                default:
+                    icon.className = 'fas fa-info-circle text-blue-400';
+            }
+            
+            // Auto hide
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        async function loadUserStats() {
+            if (!idToken) return;
+            
+            try {
+                const response = await fetch('/user/stats', {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success') {
+                    const stats = data.stats;
+                    document.getElementById('dailyUsage').textContent = 
+                        `${stats.prompts_today}/${stats.daily_limit}`;
+                    
+                    const usagePercentage = (stats.prompts_today / stats.daily_limit) * 100;
+                    document.getElementById('usageBar').style.width = `${Math.min(usagePercentage, 100)}%`;
+                    
+                    document.getElementById('promptCount').textContent = 
+                        `${stats.total_prompts} prompts`;
+                }
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        async function loadHistory() {
+            if (!idToken) return;
+            
+            try {
+                const response = await fetch('/prompts/history?limit=10', {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success') {
+                    const historyList = document.getElementById('historyList');
+                    const historyCount = document.getElementById('historyCount');
+                    
+                    historyCount.textContent = data.count;
+                    
+                    if (data.prompts.length > 0) {
+                        historyList.innerHTML = data.prompts.map(prompt => `
+                            <div class="p-3 rounded-xl hover:bg-gray-800/50 transition-colors cursor-pointer border border-gray-800"
+                                 onclick="loadPromptFromHistory('${prompt.id}')">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-sm font-medium truncate">${prompt.original_prompt.substring(0, 50)}...</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-indigo-500/20 text-indigo-400">
+                                        ${prompt.prompt_type}
+                                    </span>
+                                </div>
+                                <div class="text-xs text-gray-500">
+                                    ${new Date(prompt.created_at).toLocaleDateString()}
+                                    • ${prompt.word_count} words
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load history:', error);
+            }
+        }
+
+        function loadTemplates() {
+            // This would be populated from your backend /templates endpoint
+            const templates = [
+                {
+                    id: 1,
+                    title: 'Creative Writing',
+                    description: 'Generate engaging stories and narratives',
+                    type: 'text',
+                    icon: 'fa-pen-nib',
+                    color: 'indigo'
+                },
+                {
+                    id: 2,
+                    title: 'Product Description',
+                    description: 'Create compelling product copy',
+                    type: 'text',
+                    icon: 'fa-tag',
+                    color: 'blue'
+                },
+                {
+                    id: 3,
+                    title: 'UI/UX Design',
+                    description: 'Design prompts for AI image generation',
+                    type: 'image',
+                    icon: 'fa-paint-brush',
+                    color: 'purple'
+                },
+                {
+                    id: 4,
+                    title: 'Code Review',
+                    description: 'Analyze and improve code quality',
+                    type: 'code',
+                    icon: 'fa-code',
+                    color: 'green'
+                },
+                {
+                    id: 5,
+                    title: 'Social Media Post',
+                    description: 'Create engaging social content',
+                    type: 'text',
+                    icon: 'fa-hashtag',
+                    color: 'pink'
+                },
+                {
+                    id: 6,
+                    title: 'Data Visualization',
+                    description: 'Generate charts and graphs prompts',
+                    type: 'data',
+                    icon: 'fa-chart-bar',
+                    color: 'yellow'
+                }
+            ];
+
+            const container = document.querySelector('#templatesSection .grid');
+            container.innerHTML = templates.map(template => `
+                <div class="card-hover glass rounded-2xl p-6 border border-${template.color}-500/20">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-${template.color}-500/10 flex items-center justify-center">
+                            <i class="fas ${template.icon} text-${template.color}-400 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold mb-2">${template.title}</h3>
+                            <p class="text-sm text-gray-400 mb-4">${template.description}</p>
+                            <button onclick="useTemplate(${template.id})" 
+                                    class="text-sm text-${template.color}-400 hover:text-${template.color}-300">
+                                Use Template →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatKey(key) {
+            return key.replace(/_/g, ' ')
+                     .replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        window.openSettings = () => {
+            settingsModal.classList.remove('hidden');
+        };
+
+        window.closeSettings = () => {
+            settingsModal.classList.add('hidden');
+        };
+
+        window.toggleTheme = () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        };
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
