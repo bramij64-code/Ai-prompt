@@ -1,0 +1,7 @@
+quart
+quart-cors
+google-generativeai
+firebase-admin
+python-dotenv
+uvicorn
+gunicorn
